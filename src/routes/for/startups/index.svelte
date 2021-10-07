@@ -6,6 +6,8 @@
   import Header from "../../../components/startups/header.svelte";
   import Eligibility from "../../../components/startups/eligibility.svelte";
   import HelpfulResources from "../../../components/startups/helpful-resources.svelte";
+  import Faqs from "../../../components/startups/faqs.svelte";
+  import Explore from "../../../components/explore.svelte";
 </script>
 
 <Header />
@@ -20,3 +22,14 @@
 <Eligibility />
 
 <HelpfulResources />
+
+<Faqs />
+
+<Explore
+  contents={{
+    title: "Apply Now",
+    note: "Use all our services for free, up to 2 years.",
+    link: { text: "Apply Now", href: "https://bit.ly/3liFICY" },
+    useKumquatIllustration: true
+  }}
+/>

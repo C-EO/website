@@ -6,5 +6,7 @@ type Link = {
 export type ExploreSection = {
   title?: string;
   description?: string;
+  note?: string;
   link?: Link;
+  useKumquatIllustration?: boolean
 };

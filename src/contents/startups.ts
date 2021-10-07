@@ -51,3 +51,23 @@ export const programBenefits: ProgramBenefit[] = [
       "Engage with, learn from and share best practices with other startups that use Gitpod.",
   },
 ];
+
+export const faqs: {title: string, text: string}[] = [
+  {
+    title: 'Are both SaaS and the self-hosted option part of the program?',
+    text: 'We are happy to manage Gitpod for you to let you focus on the important things, but if you want to self-host on your infrastructure, that\'s possible too, without user limit.'
+  },
+  {
+    title: 'How do I know if my accelerator/incubator/VC firm is part of Gitpod for Startups?',
+    text: 'Please check this list (link to be added). You still get one year for free, even if you don\'t find your organisation on the list.'
+
+  },
+  {
+    title: 'What happens after the end of the program?',
+    text: 'At the end of the program, you decide if you want to keep using Gitpod in a professional plan or in the free plan with limited usage. You\'ll be notified before the end of the program.'
+  },
+  {
+    title: 'I\'m not eligible but still want to use Gitpod',
+    text: 'We have a very generous <a href="/pricing">free plan</a> for up to 50h a month, including private repos.'
+  }
+]
