@@ -38,7 +38,7 @@
   class="grid justify-items-center grid-cols-1 md:grid-cols-2 max-w-4xl m-auto lg:max-w-full lg:grid-cols-1 gap-xx-small"
 >
   {#each guides as guide}
-    <PostPreview post={guide} type="guides" isMostRecent />
+    <PostPreview post={guide} layout="row" type="guides" isMostRecent />
   {/each}
 </div>
 

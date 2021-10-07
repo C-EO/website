@@ -7,8 +7,9 @@
   export let post: BlogPost;
   export let isMostRecent: boolean = false;
   export let type: "blog" | "guides";
+  export let layout: "row" | "column" = "column";
 
-  export let headlineOrder: "h3";
+  export let headlineOrder: "h3" | "" = "";
 </script>
 
 <style type="text/postcss">
@@ -40,7 +41,7 @@
 
 <div
   class:bg-sand-dark={!isMostRecent}
-  class="{type} flex flex-col max-w-sm lg:max-w-none {type === 'blog'
+  class="flex flex-col max-w-sm lg:max-w-none {layout === 'column'
     ? ''
     : 'lg:flex-row lg:max-w-max mx-auto'} rounded-xl bg-off-white"
 >
@@ -49,8 +50,8 @@
       <div
         role="img"
         aria-label={`${type === "blog" ? "Blog post" : "Guide"}: ${post.title}`}
-        class="object-cover m-auto overflow-hidden rounded-t-xl bg-center bg-cover w-full h-64 {type ===
-        'blog'
+        class="object-cover m-auto overflow-hidden rounded-t-xl bg-center bg-cover w-full h-64 {layout ===
+        'column'
           ? ''
           : 'lg:rounded-l-xl lg:rounded-t-none lg:w-60 lg:h-full'}"
         style={`background-image: url(/images/${type}/${post.slug}/${post.image});`}
@@ -58,7 +59,7 @@
     </a>
   {/if}
   <div
-    class="blurb {type === 'blog'
+    class="blurb {layout === 'column'
       ? 'flex-col h-full'
       : ''} flex flex-wrap lg:justify-between p-x-small pt-small"
   >

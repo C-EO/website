@@ -4,6 +4,42 @@ import { terminalSource, linuxSource } from "../terminal";
 // @ts-ignore
 import Workspaces from "../../components/workspaces.svelte";
 
+export const multiTrackDevelopmentFeature: Feature = {
+  title: "Multi track development with ease",
+  paragraph:
+    "You can have multiple workspaces with different contexts open at once - one for your feature, one for a bug or one for your code review directly in Gitpod.",
+  image: {
+    src: "/svg/features/muti-track-development.svg",
+    alt: "Multi track development with ease",
+  },
+};
+
+export const collaborationFeature: Feature = {
+  title: "Where teams code together",
+  paragraph:
+    "Collaborate on tasks without making changes to your dev environment. Share running workspaces for pair programming, use port forwarding or share a snapshot as a copy of your workspace with teammates.",
+  image: {
+    src: "/images/features/collaboration.png",
+    alt: "Collaboration",
+    classNames: "shadow-medium",
+    styles: "border-radius: 7px",
+  },
+};
+
+export const codeAnywhereFeature: Feature = {
+  title: "Code anywhere, on any device",
+  paragraph:
+    "You no longer need an over-powered laptop to code, Gitpod works just as smoothly on a Chromebook or iPad. All you need is a browser. ",
+  moreButton: {
+    href: "#get-started",
+    text: "Try now",
+  },
+  image: {
+    src: "/images/features/ipad.png",
+    alt: "Gitpod Workspace on an iPad.",
+  },
+};
+
 export const features: Feature[] = [
   {
     title: "Remote development without friction",
@@ -26,15 +62,7 @@ export const features: Feature[] = [
 ];
 
 export const otherFeatures: Feature[] = [
-  {
-    title: "Multi track development with ease",
-    paragraph:
-      "You can have multiple workspaces with different contexts open at once - one for your feature, one for a bug or one for your code review directly in Gitpod.",
-    image: {
-      src: "/svg/features/muti-track-development.svg",
-      alt: "Multi track development with ease",
-    },
-  },
+  multiTrackDevelopmentFeature,
   {
     title: "Bringing dev closer to prod",
     paragraph:
@@ -52,33 +80,13 @@ export const otherFeatures: Feature[] = [
     },
   },
   {
-    title: "Where teams code together",
-    paragraph:
-      "Collaborate on tasks without making changes to your dev environment. Share running workspaces for pair programming, use port forwarding or share a snapshot as a copy of your workspace with teammates.",
+    ...collaborationFeature,
     moreButton: {
       href: "/docs/sharing-and-collaboration",
       text: "More on collaboration",
     },
-    image: {
-      src: "/images/features/collaboration.png",
-      alt: "Collaboration",
-      classNames: "shadow-medium",
-      styles: "border-radius: 7px",
-    },
   },
-  {
-    title: "Code anywhere, on any device",
-    paragraph:
-      "You no longer need an over-powered laptop to code, Gitpod works just as smoothly on a Chromebook or iPad. All you need is a browser. ",
-    moreButton: {
-      href: "#get-started",
-      text: "Try now",
-    },
-    image: {
-      src: "/images/features/ipad.png",
-      alt: "Gitpod Workspace on an iPad.",
-    },
-  },
+  codeAnywhereFeature,
 ];
 
 export const secondaryFeatures: SecondaryFeature[] = [
