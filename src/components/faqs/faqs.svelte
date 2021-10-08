@@ -11,4 +11,6 @@
   setContext(faqsKey, activeFaq);
 </script>
 
-<slot />
+<div class="max-w-6xl mx-auto">
+  <slot />
+</div>

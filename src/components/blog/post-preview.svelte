@@ -43,7 +43,7 @@
   class:bg-sand-dark={!isMostRecent}
   class="flex flex-col max-w-sm lg:max-w-none {layout === 'column'
     ? ''
-    : 'lg:flex-row lg:max-w-max mx-auto'} rounded-xl bg-off-white"
+    : 'lg:flex-row lg:max-w-6xl mx-auto'} rounded-xl bg-off-white"
 >
   {#if isMostRecent}
     <a href="/{type}/{post.slug}" sveltekit:prefetch>
