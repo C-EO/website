@@ -17,7 +17,7 @@ export const multiTrackDevelopmentFeature: Feature = {
 export const collaborationFeature: Feature = {
   title: "Where teams code together",
   paragraph:
-    "Collaborate on tasks without making changes to your dev environment. Share running workspaces for pair programming, use port forwarding or share a snapshot as a copy of your workspace with teammates.",
+    "Share running workspaces for pair programming, use port forwarding or share a snapshot as a copy of your workspace with teammates.",
   image: {
     src: "/images/features/collaboration.png",
     alt: "Collaboration",
@@ -30,10 +30,6 @@ export const codeAnywhereFeature: Feature = {
   title: "Code anywhere, on any device",
   paragraph:
     "You no longer need an over-powered laptop to code, Gitpod works just as smoothly on a Chromebook or iPad. All you need is a browser. ",
-  moreButton: {
-    href: "#get-started",
-    text: "Try now",
-  },
   image: {
     src: "/images/features/ipad.png",
     alt: "Gitpod Workspace on an iPad.",
@@ -86,7 +82,13 @@ export const otherFeatures: Feature[] = [
       text: "More on collaboration",
     },
   },
-  codeAnywhereFeature,
+ { 
+   ...codeAnywhereFeature,
+   moreButton: {
+    href: "#get-started",
+    text: "Try now",
+  },
+ },
 ];
 
 export const secondaryFeatures: SecondaryFeature[] = [

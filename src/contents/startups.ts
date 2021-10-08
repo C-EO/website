@@ -6,19 +6,18 @@ import {
   multiTrackDevelopmentFeature,
 } from "./home/features";
 import type { ExploreSection } from "src/types/explore-section.type";
+import { terminalSource } from "./terminal";
 
 export const features: Feature[] = [
   {
     title: "Develop like Google, Facebook or Shopify",
     paragraph:
       "What big tech companies are trying to build internally, Gitpod is bringing to the rest of the world:  container-based development in the cloud.",
-    image: {
-      src: "/terminal.png",
-      alt: "Gitpod Prebuilds",
-      classNames: "rounded-4xl shadow-normal",
+    terminal: {
+      source: terminalSource,
     },
   },
-  collaborationFeature,
+  { ...collaborationFeature, paragraph: 'Share running workspaces for pair programming, use port forwarding or share a snapshot as a copy of your workspace with teammates.' },
   codeAnywhereFeature,
   multiTrackDevelopmentFeature,
 ];
@@ -40,7 +39,7 @@ export const programBenefits: ProgramBenefit[] = [
     },
     title: "Double up",
     text:
-      'If you are affiliated with <a href="/for/startups/organizations">an approved VC, incubator or accelerator</a> we will extend the program from 1 year to 2 years.',
+      'If your startup is affiliated with <a href="/for/startups/organizations">an approved VC, incubator or accelerator</a> we will extend the program from 1 year to 2 years.',
   },
   {
     icon: {
@@ -56,11 +55,11 @@ export const programBenefits: ProgramBenefit[] = [
 export const faqs: { title: string, text: string }[] = [
   {
     title: 'Are both SaaS and the self-hosted option part of the program?',
-    text: 'We are happy to manage Gitpod for you to let you focus on the important things, but if you want to self-host on your infrastructure, that\'s possible too, without user limit.'
+    text: 'We are happy to manage Gitpod for you to let you focus on the important things, but if you want to <a href="/docs/self-hosted/latest">self-host</a> on your infrastructure, that\'s possible too, without user limit.'
   },
   {
     title: 'How do I know if my accelerator/incubator/VC firm is part of Gitpod for Startups?',
-    text: 'Please check this list (link to be added). You still get one year for free, even if you don\'t find your organisation on the list.'
+    text: 'Please check this list <a href="/for/startups/organizations">of organizations</a>. You still get one year for free, even if you don\'t find your organisation on the list.'
 
   },
   {
