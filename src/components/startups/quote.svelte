@@ -30,10 +30,10 @@
     “Using Gitpod will improve your feature velocity and drastically reduce your
     cycle times from commit to deploy.”
   </p>
-  <div class="inline-flex items-center text-left mt-x-small">
+  <div class="inline-flex  text-left mt-x-small">
     <img
       src="/images/startups/fabian-lange.png"
-      class="h-14 w-14 sm:h-16 sm:w-16 mr-xx-small"
+      class="h-14 w-14 sm:h-16 sm:w-16 mr-macro sm:mr-xx-small"
       alt="Fabian Lange"
     />
     <div class="text-gray-900">
