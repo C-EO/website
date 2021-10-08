@@ -1,7 +1,7 @@
 <script>
   import Section from "../../../components/section.svelte";
   import Features from "../../../components/features.svelte";
-  import { features } from "../../../contents/startups";
+  import { exploreContents, features } from "../../../contents/startups";
   import ProgramBenefits from "../../../components/startups/program-benefits.svelte";
   import Header from "../../../components/startups/header.svelte";
   import Eligibility from "../../../components/startups/eligibility.svelte";
@@ -26,10 +26,5 @@
 <Faqs />
 
 <Explore
-  contents={{
-    title: "Apply Now",
-    note: "Use all our services for free, up to 2 years.",
-    link: { text: "Apply Now", href: "https://bit.ly/3liFICY" },
-    useKumquatIllustration: true
-  }}
+  contents={exploreContents}
 />
