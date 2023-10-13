@@ -1,5 +1,5 @@
 <kbd>
-  <samp>
-    <slot />
-  </samp>
+	<samp>
+		<slot />
+	</samp>
 </kbd>

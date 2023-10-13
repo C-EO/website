@@ -1,4 +1,4 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 
 // true: mobile menu open
 // false: mobile menu closed

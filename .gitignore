@@ -8,10 +8,8 @@
 build/
 cypress/screenshots
 cypress/videos
-static/global.css
-static/styles.css
 yarn-error.log
 yarn.lock
 .idea
-stars-cache.json
+.stars-cache
 .env

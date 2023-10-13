@@ -1,2 +1,2 @@
-import { Type } from "./input";
+import { Type } from './input';
 export default Type;

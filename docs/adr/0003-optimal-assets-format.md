@@ -26,8 +26,8 @@ We have decided to use convert & use all the assets in following manner:
 
 ## Consequences
 
-- Higher Picture Quality with smaller size leads to higher performance & faster loading time.
-- Relatively Faster build time.
+-   Higher Picture Quality with smaller size leads to higher performance & faster loading time.
+-   Relatively Faster build time.
 
 ## Additional Comments
 

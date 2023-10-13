@@ -1,5 +1,5 @@
 export declare type BannerData = {
-  startDate: string;
-  endDate: string;
-  display: boolean;
+	startDate: Date;
+	endDate: Date;
+	display: boolean;
 };

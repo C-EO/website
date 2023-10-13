@@ -1,2 +1,2 @@
-import Avatars from "./avatars.svelte";
+import Avatars from './avatars.svelte';
 export default Avatars;

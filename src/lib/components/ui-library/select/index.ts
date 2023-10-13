@@ -1,2 +1,2 @@
-import Select from "./select.svelte";
+import Select from './select.svelte';
 export default Select;

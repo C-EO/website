@@ -1,1 +1,1 @@
-export declare type Type = "text" | "email" | "tel";
+export declare type Type = 'text' | 'email' | 'tel';

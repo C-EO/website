@@ -1,29 +1,29 @@
 <script lang="ts">
-  import type { FAQ } from "$lib/types/faq";
+	import type { FAQ } from '$lib/types/faq';
 
-  export let faq: FAQ;
+	export let faq: FAQ;
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [],
-  };
+	const structuredData = {
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: [],
+	};
 
-  faq.items.forEach(({ title, content }) => {
-    structuredData.mainEntity.push({
-      "@type": "Question",
-      name: title,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: content,
-      },
-    });
-  });
+	faq.items.forEach(({ title, content }) => {
+		structuredData.mainEntity.push({
+			'@type': 'Question',
+			name: title,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: content,
+			},
+		});
+	});
 
-  // Thanks to https://github.com/sveltejs/svelte/issues/5292#issuecomment-787743573
-  const html = `<${""}script type="application/ld+json">${JSON.stringify(
-    structuredData
-  )}</${""}script>`;
+	// Thanks to https://github.com/sveltejs/svelte/issues/5292#issuecomment-787743573
+	const html = `<${''}script type="application/ld+json">${JSON.stringify(
+		structuredData,
+	)}</${''}script>`;
 </script>
 
 {@html html}

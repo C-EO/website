@@ -1,13 +1,13 @@
-import type { SvelteComponent } from "svelte";
+import type { SvelteComponent } from 'svelte';
 
 declare const _textareaProps: {
-  value: string;
-  class?: string;
-  element?: HTMLElement;
+	value: string;
+	class?: string;
+	element?: HTMLElement;
 };
 
 declare const _textareaEvents: {
-  change: Event;
+	change: Event;
 };
 
 declare const _textareaSlots: {};

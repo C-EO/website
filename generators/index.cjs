@@ -1,5 +1,5 @@
-const blogPostGenerator = require("./blog-post.cjs");
+const blogPostGenerator = require('./blog-post.cjs');
 
 module.exports = (plop) => {
-  plop.setGenerator("blog-post", blogPostGenerator(plop));
+	plop.setGenerator('blog-post', blogPostGenerator(plop));
 };

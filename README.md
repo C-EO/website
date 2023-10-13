@@ -11,33 +11,33 @@ Gitpod removes all friction from the developer experience to be always ready-to-
 
 **Mandatory labels:**
 
-- A `team: x` - Which team the issue belongs to
-- A `section: x` - Which area of docs it corresponds to (helps understand ownership)
-- A `type: x` - e.g. `bug`, `suggestion`, `question`
+-   A `team: x` - Which team the issue belongs to
+-   A `section: x` - Which area of docs it corresponds to (helps understand ownership)
+-   A `type: x` - e.g. `bug`, `suggestion`, `question`
 
-Issues without `status: backlog` require triage ([link](https://github.com/gitpod-io/website/issues?q=is%3Aopen+-label%3A%22status%3A+backlog%22+))
+Issues without `status: backlog` requires triage ([link](https://github.com/gitpod-io/website/issues?q=is%3Aopen+-label%3A%22status%3A+backlog%22+))
 
 ## CLI Commands
 
-- Generate blog post:
+-   Generate blog:
 
-  ```sh
-  npm run generate:blog-post
-  ```
+    ```sh
+    npm run generate:blog
+    ```
 
-- Generate JetBrains pages:
+-   Generate JetBrains pages:
 
-  ```sh
-  npm run generate:jb
-  ```
+    ```sh
+    npm run generate:jb
+    ```
 
 ## Tech stack
 
-- [Svelte](https://svelte.dev)
-- [SvelteKit](https://kit.svelte.dev)
-- [mdsvex](https://mdsvex.com)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Netlify](https://www.netlify.com)
+-   [Svelte](https://svelte.dev)
+-   [SvelteKit](https://kit.svelte.dev)
+-   [mdsvex](https://mdsvex.com)
+-   [Tailwind CSS](https://tailwindcss.com)
+-   [Netlify](https://www.netlify.com)
 
 ## Contribute
 

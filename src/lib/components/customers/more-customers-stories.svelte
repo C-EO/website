@@ -1,16 +1,17 @@
 <script lang="ts">
-  import { page, session } from "$app/stores";
-  import Stories from "./stories.svelte";
+	import Stories from './stories.svelte';
+	import { page } from '$app/stores';
+	import type { Customer } from '$content/customers';
 
-  const recentPosts = $session.customers.slice(0, 4);
-  $: recentCustomersWithoutCurrent = recentPosts
-    .filter((customer: any) => $page.url.pathname.indexOf(customer.slug) === -1)
-    .slice(0, 3)
-    .filter((customer: any) => customer.availibility !== false);
+	export let customers: Customer[];
+
+	$: recentCustomers = customers
+		.filter((customer) => customer.slug != $page.params.slug)
+		.slice(0, 3);
 </script>
 
 <Stories
-  title="More Customer Stories"
-  customers={recentCustomersWithoutCurrent}
-  class="max-w-4xl md:grid-cols-2 lg:px-9"
+	title="More Customer Stories"
+	customers={recentCustomers}
+	class="max-w-7xl md:grid-cols-3 lg:px-9"
 />

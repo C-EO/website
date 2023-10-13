@@ -1,24 +1,8 @@
 <div
-  class="max-w-4xl flex lgx:items-start flex-col items-center text-center lgx:text-left lgx:pt-xx-small mb-xx-small"
+	class="flex flex-wrap justify-center max-w-6xl mx-auto flex-col text-center"
 >
-  <h2 class="h3 !mb-micro md:!mb-x-small">
-    Stay in control with Gitpod Dedicated
-  </h2>
-  <div class="max-w-[460px] text-p-large">
-    <p class="">
-      Learn about our newest product: Gitpod Dedicated is an isolated,
-      single-tenant installation managed by Gitpod.
-    </p>
-    <br />
-    <ul class="pl-xx-small list-disc">
-      <li>
-        Get a private instance of Gitpod - ideal for large companies with high
-        security requirements
-      </li>
-      <br />
-      <li>
-        Set up private networking connections to your development resources
-      </li>
-    </ul>
-  </div>
+	<p class="text-grey mb-micro font-bold">Gitpod Dedicated</p>
+	<h2 class="h1 !mb-0 max-w-2xl text-center mx-auto">
+		Built for developers, <br /> trusted by enterprise.
+	</h2>
 </div>

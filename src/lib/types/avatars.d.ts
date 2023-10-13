@@ -1,3 +1,3 @@
 export declare type SocialMediaLinks = {
-  [username: string]: string;
+	[username: string]: string;
 };

@@ -1,5 +1,5 @@
 export type ProgramFeature = {
-  image: string;
-  title: string;
-  paragraphs: string[];
+	image: string;
+	title: string;
+	paragraphs: string[];
 };

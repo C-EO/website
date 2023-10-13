@@ -1,10 +1,10 @@
 <script>
-  import NavItem from "./nav-item.svelte";
+	import NavItem from './nav-item.svelte';
 </script>
 
 <NavItem
-  navItem={{
-    href: "/contact",
-    label: "Contact",
-  }}
+	navItem={{
+		href: '/contact',
+		label: 'Contact',
+	}}
 />

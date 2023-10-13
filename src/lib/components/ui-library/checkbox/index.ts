@@ -1,2 +1,2 @@
-import Checkbox from "./checkbox.svelte";
+import Checkbox from './checkbox.svelte';
 export default Checkbox;

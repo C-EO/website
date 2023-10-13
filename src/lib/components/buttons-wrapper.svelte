@@ -1,9 +1,9 @@
 <script lang="ts">
-  let clazz = "";
+	let clazz = '';
 
-  export { clazz as class };
+	export { clazz as class };
 </script>
 
 <div class="flex flex-wrap gap-4 {clazz}" {...$$restProps}>
-  <slot />
+	<slot />
 </div>

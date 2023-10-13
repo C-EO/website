@@ -1,4 +1,4 @@
 export type Header = {
-  title: string;
-  image?: string;
+	title: string;
+	image?: string;
 };

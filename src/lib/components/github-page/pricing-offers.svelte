@@ -1,22 +1,22 @@
 <script lang="ts">
-  import PricingBoxes from "../pricing/pricing-boxes.svelte";
-  import type { Pricing } from "$lib/types/pricing";
+	import PricingBoxes from '../pricing/pricing-boxes.svelte';
+	import type { Pricing } from '$lib/types/pricing';
 
-  export let title: string;
-  export let pricingPlans: Pricing[];
+	export let title: string;
+	export let pricingPlans: Pricing[];
 </script>
 
-<style lang="scss">
-  .top :global(a) {
-    @apply underline;
-  }
-</style>
-
 <div class="text-center">
-  <div class="top max-w-3xl mx-auto mb-small">
-    <h2>{title}</h2>
-    <div><slot name="description" /></div>
-  </div>
+	<div class="top max-w-3xl mx-auto mb-small">
+		<h2>{title}</h2>
+		<div><slot name="description" /></div>
+	</div>
 
-  <PricingBoxes {pricingPlans} />
+	<PricingBoxes plan={pricingPlans} />
 </div>
+
+<style lang="postcss">
+	.top :global(a) {
+		@apply underline;
+	}
+</style>

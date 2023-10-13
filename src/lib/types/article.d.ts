@@ -1,5 +1,5 @@
 export type Article = {
-  title: string;
-  text: string;
-  slug: string;
+	title: string;
+	text: string;
+	slug: string;
 };

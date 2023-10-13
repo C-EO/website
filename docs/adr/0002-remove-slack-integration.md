@@ -18,5 +18,5 @@ Remove the Slack Integration from the Feedback Endpoint
 
 ## Consequences
 
-- We can get rid of the dependency `@slack/webhook`
-- The Feedback gets sent to Slack as a zap, that gets triggered by the Google Spreadsheet
+-   We can get rid of the dependency `@slack/webhook`
+-   The Feedback gets sent to Slack as a zap, that gets triggered by the Google Spreadsheet

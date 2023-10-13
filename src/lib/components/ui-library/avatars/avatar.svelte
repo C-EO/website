@@ -1,6 +1,6 @@
 <script>
-  export let username;
-  export let socialMediaImgClasses;
+	export let username;
+	export let socialMediaImgClasses;
 </script>
 
 <!-- We use the GitHub profile image because the Twitter profile image needs an authenticated API call -->
@@ -16,11 +16,11 @@
 
 <!-- This uses a Netlify-Endpoint for returning the image -->
 <img
-  src="https://www.gitpod.io/.netlify/functions/avatar?username={username}"
-  alt="@{username}'s avatar on GitHub"
-  height="28"
-  width="28"
-  title="@{username}"
-  class="inline !rounded-full border border-solid border-card {socialMediaImgClasses}"
-  loading="lazy"
+	src="https://github.com/{username}.png"
+	alt="@{username}'s avatar on GitHub"
+	height="28"
+	width="28"
+	title="@{username}"
+	class="inline !rounded-full border border-solid border-card {socialMediaImgClasses}"
+	loading="lazy"
 />

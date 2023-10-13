@@ -1,541 +1,430 @@
-import type { Brand } from "$lib/types/brand";
-import type { Project } from "$lib/types/project";
-import type { Testimonial } from "$lib/types/testimonial";
-import type { Ide } from "$lib/types/ide";
-import GitlabLogo from "$lib/components/svgs/brands/gitlab-logo.svelte";
-import FreecodecampLogo from "$lib/components/svgs/brands/freecodecamp.svelte";
-import Google from "$lib/components/svgs/brands/google.svelte";
-import Factorial from "$lib/components/svgs/brands/factorial.svelte";
-import Datastax from "$lib/components/svgs/brands/datastax.svelte";
-import Amazon from "$lib/components/svgs/brands/amazon.svelte";
-import Shares from "$lib/components/svgs/brands/shares.svelte";
-import Astrato from "$lib/components/svgs/brands/astrato.svelte";
-import CodeInstitute from "$lib/components/svgs/brands/code-institute.svelte";
-import Redwood from "$lib/components/svgs/brands/redwood.svelte";
-import Jetbrains from "$lib/components/svgs/brands/jetbrains.svelte";
-import FourGeeks from "$lib/components/svgs/brands/fourgeeks.svelte";
-import type { FeatureTitle } from "$lib/types/feature-title";
+import GitlabLogo from '$lib/components/svgs/brands/gitlab-logo.svelte';
+import FreecodecampLogo from '$lib/components/svgs/brands/freecodecamp.svelte';
+import Google from '$lib/components/svgs/brands/google.svelte';
+import Factorial from '$lib/components/svgs/brands/factorial.svelte';
+import Datastax from '$lib/components/svgs/brands/datastax.svelte';
+import Amazon from '$lib/components/svgs/brands/amazon.svelte';
+import Shares from '$lib/components/svgs/brands/shares.svelte';
+import Astrato from '$lib/components/svgs/brands/astrato.svelte';
+import CodeInstitute from '$lib/components/svgs/brands/code-institute.svelte';
+import Redwood from '$lib/components/svgs/brands/redwood.svelte';
+import Jetbrains from '$lib/components/svgs/brands/jetbrains.svelte';
+import Dynatrace from '$lib/components/svgs/brands/logo-dtrace.svelte';
+import EquipmentShare from '$lib/components/svgs/brands/equipmentshare.svelte';
+import FourGeeks from '$lib/components/svgs/brands/fourgeeks.svelte';
+import type { Brand } from '$lib/types/brand';
+import type { Project } from '$lib/types/project';
+import type { Testimonial } from '$lib/types/testimonial';
+import type { Ide } from '$lib/types/ide';
+import type { FeatureTitle } from '$lib/types/feature-title';
 
 export const gitlab: Brand = {
-  alt: "GitLab",
-  logo: GitlabLogo,
+	alt: 'GitLab',
+	logo: GitlabLogo,
 };
 
 export const freeCodeCamp: Brand = {
-  alt: "freeCodeCamp",
-  logo: FreecodecampLogo,
-  transform: "scale(1.1)",
+	alt: 'freeCodeCamp',
+	logo: FreecodecampLogo,
+	transform: 'scale(1.4)',
 };
 
 export const google: Brand = {
-  alt: "Google",
-  logo: Google,
-  transform: "scale(0.9)",
+	alt: 'Google',
+	logo: Google,
+	transform: 'scale(0.9)',
 };
 
 export const factorial: Brand = {
-  alt: "Factorial",
-  logo: Factorial,
+	alt: 'Factorial',
+	logo: Factorial,
 };
 
 export const dataStax: Brand = {
-  alt: "DataStax",
-  logo: Datastax,
-  transform: "scale(1.1)",
+	alt: 'DataStax',
+	logo: Datastax,
+	transform: 'scale(1.1)',
 };
 
 export const amazon: Brand = {
-  alt: "Amazon",
-  logo: Amazon,
-  transform: "scale(0.9) translateY(5px)",
+	alt: 'Amazon',
+	logo: Amazon,
+	transform: 'scale(0.9)',
 };
 
 export const shares: Brand = {
-  alt: "Shares",
-  logo: Shares,
-  transform: "scale(1.1)",
+	alt: 'Shares',
+	logo: Shares,
+	transform: 'scale(1.1)',
 };
 
 export const astrato: Brand = {
-  alt: "Astrato",
-  logo: Astrato,
-  transform: "scale(1.1)",
+	alt: 'Astrato',
+	logo: Astrato,
+	transform: 'scale(1.1)',
 };
 
 export const redwood: Brand = {
-  alt: "Redwood",
-  logo: Redwood,
-  transform: "scale(1.1)",
+	alt: 'Redwood',
+	logo: Redwood,
+	transform: 'scale(1.1)',
 };
 
 export const codeInstitute: Brand = {
-  alt: "Code Institute",
-  logo: CodeInstitute,
+	alt: 'Code Institute',
+	logo: CodeInstitute,
 };
 
 export const jetbrains: Brand = {
-  logo: Jetbrains,
-  alt: "JetBrains",
+	logo: Jetbrains,
+	alt: 'JetBrains',
+	transform: 'scale(0.95)',
 };
 
 export const fourGeeks: Brand = {
-  logo: FourGeeks,
-  alt: "Four Geeks",
+	logo: FourGeeks,
+	alt: 'Four Geeks',
+	transform: 'scale(1.0)',
+};
+
+export const equipmentShare: Brand = {
+	logo: EquipmentShare,
+	alt: 'Equipmentshare',
+	transform: 'scale(1.6)',
+};
+
+export const dynatrace: Brand = {
+	logo: Dynatrace,
+	alt: 'Dynatrace',
+	transform: 'scale(1.3)',
 };
 
 export const brands: Brand[] = [
-  gitlab,
-  freeCodeCamp,
-  google,
-  factorial,
-  dataStax,
-  amazon,
-  shares,
-  astrato,
-  redwood,
-  codeInstitute,
+	gitlab,
+	dynatrace,
+	factorial,
+	dataStax,
+	equipmentShare,
+	amazon,
+	shares,
+	astrato,
+	redwood,
+	codeInstitute,
+	fourGeeks,
+	freeCodeCamp,
 ];
 
 export const logosAnimated: Brand[] = [
-  freeCodeCamp,
-  gitlab,
-  jetbrains,
-  redwood,
-  google,
-  amazon,
-  codeInstitute,
-  fourGeeks,
-  dataStax,
-  shares,
-  astrato,
-  factorial,
+	dataStax,
+	gitlab,
+	amazon,
+	astrato,
+	equipmentShare,
+	redwood,
+	codeInstitute,
+	dynatrace,
+	factorial,
+	fourGeeks,
+	shares,
+	freeCodeCamp,
 ];
 
 export const projects: Project[] = [
-  {
-    logo: "svg/projects/ts.svg",
-    title: "Node or TypeScript",
-    githubUrl: "https://github.com/gitpod-io/example-typescript-node",
-    alt: "Node or TypeScript",
-    trackingName: "node-typescript",
-  },
-  {
-    logo: "svg/projects/python.svg",
-    title: "Python",
-    githubUrl: "https://github.com/gitpod-io/example-python-django",
-    alt: "Python",
-    trackingName: "python",
-  },
-  {
-    logo: "svg/projects/go.svg",
-    title: "Golang",
-    githubUrl: "https://github.com/gitpod-io/example-golang-cli",
-    alt: "Golang",
-    trackingName: "go",
-  },
-  {
-    logo: "svg/projects/rust.svg",
-    title: "Rust",
-    githubUrl: "https://github.com/gitpod-io/example-rust-cli",
-    alt: "Rust",
-    trackingName: "rust",
-  },
-  {
-    logo: "svg/projects/java.svg",
-    title: "Java",
-    githubUrl: "https://github.com/gitpod-io/spring-petclinic",
-    gitlabUrl: "https://gitlab.com/gitpod/spring-petclinic",
-    bitbucketUrl: "https://bitbucket.org/gitpod/spring-petclinic",
-    alt: "Java",
-    trackingName: "java",
-  },
-  {
-    logo: "svg/projects/svelte.svg",
-    title: "Svelte",
-    githubUrl: "https://github.com/gitpod-io/sveltejs-template",
-    alt: "Svelte",
-    trackingName: "svelte",
-  },
-  // {
-  //   logo: "svg/projects/php.svg",
-  //   title: "PHP & Symfony",
-  //   githubUrl: "https://github.com/gitpod-io/symfony-demo",
-  //   alt: "PHP",
-  // },
-  // {
-  //   logo: "svg/projects/dotnet-core.svg",
-  //   title: ".NET Core",
-  //   githubUrl: "https://github.com/gitpod-io/example-dotnet-core",
-  //   gitlabUrl: "https://gitlab.com/gitpod/dotnetcore",
-  //   bitbucketUrl: "https://bitbucket.org/gitpod/dotnetcore",
-  //   alt: "C#",
-  // },
-  // {
-  //   logo: "python.png",
-  //   title: "Python & Flask",
-  //   githubUrl: "https://github.com/breatheco-de/python-flask-api-tutorial",
-  //   alt: "Python",
-  // },
-  // {
-  //     logo: 'ruby.png',
-  //     title: 'Rails & Postgres',
-  //     githubUrl: "https://github.com/gitpod-io/ruby-on-rails",
-  //     gitlabUrl: "https://gitlab.com/gitpod/rails",
-  //     bitbucketUrl: "https://bitbucket.org/gitpod/ruby-on-rails",
-  //     alt: "Ruby",
-  // },
+	{
+		logo: 'svg/projects/ts.svg',
+		title: 'Node or TypeScript',
+		githubUrl: 'https://github.com/gitpod-io/example-typescript-node',
+		alt: 'Node or TypeScript',
+		trackingName: 'node-typescript',
+	},
+	{
+		logo: 'svg/projects/python.svg',
+		title: 'Python',
+		githubUrl: 'https://github.com/gitpod-io/example-python-django',
+		alt: 'Python',
+		trackingName: 'python',
+	},
+	{
+		logo: 'svg/projects/java.svg',
+		title: 'Java',
+		githubUrl: 'https://github.com/gitpod-io/spring-petclinic',
+		gitlabUrl: 'https://gitlab.com/gitpod/spring-petclinic',
+		bitbucketUrl: 'https://bitbucket.org/gitpod/spring-petclinic',
+		alt: 'Java',
+		trackingName: 'java',
+	},
+	{
+		logo: 'svg/projects/go.svg',
+		title: 'Golang',
+		githubUrl: 'https://github.com/gitpod-io/example-golang-cli',
+		alt: 'Golang',
+		trackingName: 'go',
+	},
+	{
+		logo: 'svg/projects/rust.svg',
+		title: 'Rust',
+		githubUrl: 'https://github.com/gitpod-io/example-rust-cli',
+		alt: 'Rust',
+		trackingName: 'rust',
+	},
+	{
+		logo: 'svg/projects/svelte.svg',
+		title: 'Svelte',
+		githubUrl: 'https://github.com/gitpod-io/sveltejs-template',
+		alt: 'Svelte',
+		trackingName: 'svelte',
+	},
 ];
 
 export const testimonials: Testimonial[] = [
-  {
-    name: "Ben Halpern",
-    avatar: "ben-halpern.jpg",
-    org: `<span>
-          @forem
+	{
+		name: 'Tom Preston Werner',
+		avatar: 'tom-preston-werner.jpg',
+		org: `<span>
+          GitHub
         </span>
         and
         <span>
-          @ThePracticalDev
+          RedwoodJS
         </span>`,
-    role: "Creator and Co-founder",
-    text: `
-      <p>GitPod is incredibly cool.</p>
-      <p>In my opinion, this is a big step in open source software contribution. I'm excited to see where we go from here.</p>
+		role: 'Creator and Co-founder of',
+		text: `
+      <p>
+      Gitpod totally changed the development
+      velocity for RedwoodJS—it removed any
+      issues related to configurations of dev
+      environments and made it incredibly
+      easy to contribute.
+      </p>
     `,
-  },
-  {
-    name: "Michael Friedrich",
-    avatar: "michael-friedrich.jpg",
-    org: `<span>
-        @GitLab
+	},
+	{
+		name: 'Keith Adams',
+		avatar: 'keith-adams.jpg',
+		org: `<span>
+        Slack
       </span>`,
-    role: "Developer Evangelist",
-    text: `
+		role: 'Former Chief Architect of',
+		text: `
+    <p>
+    Gitpod is the most exciting developer tool
+    I have encountered since, I don’t know,
+    telnet maybe? Unix? It’s been a while.
+    </p>
+      `,
+	},
+
+	{
+		name: 'Max Shafirov',
+		avatar: 'max-shafirov.webp',
+		org: `
+      <span>
+        JetBrains
+      </span>
+    `,
+		role: 'CEO at',
+		text: `
         <p>
-          Let's say we were overwhelmed how smooth @gitpod workspaces creation & own Docker image for workspaces worked.
-        </p>
-        <p>
-          Plus, installing @code extensions from the store and integrating @gitlab CI. That blew my mind entirely, and that is hard ;)
+        Through our partnership with Gitpod, we
+        are enabling our mutual users to accelerate
+        productivity, save resources and time while
+        strengthening security compliance
         </p>
       `,
-  },
-  {
-    name: "Julius Volz",
-    avatar: "julius-volz.jpg",
-    org: `<span>
-        @PrometheusIO
+	},
+	{
+		name: 'François Ruty',
+		avatar: 'françois-ruty.webp',
+		org: `
+      <span>
+        Shares
+      </span>
+    `,
+		role: 'CTO at',
+		text: `
+          <p>
+          Gitpod easily saves every engineer half a
+          day per week. The amount of productivity
+          we gain is staggering.
+          </p>
+      `,
+	},
+	{
+		name: 'Josep Jaume',
+		avatar: 'josep-jaume.webp',
+		org: `
+      <span>
+        Factorial
+      </span>
+    `,
+		role: 'Director of Developer Experience at',
+		text: `
+      <p>
+      I’d estimate each engineer saves 5 to 10
+      hours a month on dev environment
+      issues that just don’t exist with Gitpod.
+      </p>
+    `,
+	},
+	{
+		name: 'Konrad Mattheis',
+		avatar: 'konrad-mattheis.webp',
+		org: `
+      <span>
+        Vizlib
+      </span>
+    `,
+		role: 'CTO at',
+		text: `
+      <p>
+      The ability for QAs to easily test a branch
+      resulted in 20% fewer hotfixes after releases.
+      </p>
+    `,
+	},
+
+	{
+		name: 'Alejandro Sánchez',
+		avatar: 'alejandro-sanchez.jpeg',
+		org: `
+      <span>
+        4GeeksAcademy
+      </span>
+    `,
+		role: 'Founder of',
+		text: `
+        <p>
+        I would rather shut down the academy
+        than stop using Gitpod.
+        </p>
+      `,
+	},
+	{
+		name: 'Julius Volz',
+		avatar: 'julius-volz.jpg',
+		org: `<span>
+        PrometheusIO
       </span>`,
-    role: "Creator",
-    text: `
+		role: 'Creator of',
+		text: `
       <p>
         Look at any PR (pull request) in a full coding environment where you can edit, build, and test the PR code, by just prepending "gitpod.io#" to the PR URL. Super useful for reviewing/testing stuff without having to check it out locally!
       </p>
       `,
-  },
-  {
-    name: "David Ressler",
-    avatar: "david-ressler.jpg",
-    org: `
-      <span>
-        @instagram
-      </span>
-    `,
-    role: "Engineering Manager",
-    text: `
-        <p>
-          I think I’m in love with @gitpod. It’s such a powerful tool. I’ve learned so much in the past week
-          just from stumbling across Github repos that interest me and appending
-          “http://gitpod.io/#” to the URL. A+ tool all around.
-        </p>
-      `,
-  },
-  {
-    name: "Bartłomiej Płotka",
-    avatar: "bwplotka.jpg",
-    org: `
-      <span>
-        @RedHat
-      </span>
-    `,
-    role: "Principal Software Engineer",
-    text: `
-        <div>
-          <p>
-            This @gitpod thing is magic! Pretty cool, without any extra configuration. Good work!
-          </p>
-
-          <p>https://gitpod.io/#https://github.com/thanos-io/thanos</p>
-        </div>
-      `,
-  },
-  {
-    name: "Mrugesh Mohapatra",
-    avatar: "mrugesh-mohapatra.jpg",
-    org: `
-      <span>
-        @freeCodeCamp
-      </span>
-    `,
-    role: "Technology & Community",
-    text: `
-      <p>
-          Ya'all @gitpod is freaking amazing! We integrated it into our workflow for working on @freeCodeCamp's codebase and I am honestly loving it. 🔥🔥!
-          <br />
-          Go check it out on our repo https://github.com/freeCodeCamp/f... now!
-        </p>
-    `,
-  },
-  {
-    name: "Sven Peters",
-    avatar: "sven-peters.jpg",
-    org: `
-      <span>
-        @MongoDB
-      </span>
-    `,
-    role: "Dev Advocate",
-    text: `
-      <p>
-          Huge time saver, less frustrations for devs: Automated ready-to-code
-          dev environments with pre-build workspaces. #gitpod #cloudide
-        </p>
-    `,
-  },
-  {
-    name: "Jonathan Lister Parsons",
-    avatar: "jonathan-lister-parsons.jpg",
-    org: `
-      <span>
-        @PensionBee
-      </span>
-    `,
-    role: "CTO",
-    text: `
-        <p>
-          I'm really enjoying @gitpod - for me, it's made full-stack development in the browser (yes,including mobile) a reality
-        </p>
-      `,
-  },
-  {
-    name: "Alejandro",
-    avatar: "alejandro-sanchez.jpeg",
-    org: `
-      <span>
-        @4GeeksAcademy
-      </span>
-    `,
-    role: "Co-Founder",
-    text: `
-        <p>
-          My setup is on @gitpod, just like Christopher McCandless, where I go my code goes with me,
-          no setup whatsoever Smiling face with sunglasses 😎 #IntoTheWild
-        </p>
-      `,
-  },
-  {
-    name: "ROKU",
-    avatar: "roman-kuba.jpg",
-    org: `
-      <span>
-        @GitLab
-      </span>
-    `,
-    role: "Engineering Manager",
-    text: `
-        <p>
-          Have to say that @gitpod is just super nice to use. Very impressed by the performance!
-        </p>
-    `,
-  },
-  {
-    name: "Hugh Durkin",
-    avatar: "hugh-durkin.jpg",
-    org: `
-      <span>
-        @HubSpot
-      </span>
-    `,
-    role: "Platform Ecosystem",
-    text: `
-        <p>
-          I've been playing around with the "next generation" of Cloud IDEs
-          lately, and @gitpodio is quickly emerging as one of the best 👨‍💻 <br /> Awesome @github integration, slick Chrome extension, and super fast 🚀
-          https://gitpod.io/index.html
-        </p>
-      `,
-  },
-  {
-    name: "Marcel van Remmerden",
-    avatar: "marcel-van-remmerden.jpg",
-    org: `
-      <span>
-        @GitLab
-      </span>
-    `,
-    role: "Product Design Manager",
-    text: `<p>
-          Can only agree, opening a GitLab repository in gitpod is a magical
-          experience, thanks for the integration @gitpod!
-        </p>`,
-  },
-  {
-    name: "Brendan O’Leary",
-    avatar: "brendan-o-leary.jpg",
-    org: `
-      <span>
-        @GitLab
-      </span>
-    `,
-    role: "Dev. Evangelist",
-    text: `
-        <p>
-          I just discovered the @gitlab @gitpod integration is alive on http://GitLab.com (released in 13.4 behind a feature flag). And it's AMAZING https://docs.gitlab.com/ee/integration....
-          .
-        </p>
-        <p>Now I can code from *anywhere*</p>
-      `,
-  },
-  {
-    name: "Joonas Lehtinen",
-    avatar: "joonas-lehtinen.png",
-    org: `
-      <span>
-        @vaadin
-      </span>
-    `,
-    role: "Co-founder",
-    text: `
-        <p>
-          Wow - @gitpod is a brilliant way of evaluating a framework without installing anything.
-        </p>
-        <p>
-          Launch gitpod for @vaadin at https://vaadin.com/start/v14 ("Online workspace" tab). You'll have app running and will be editing code in 3min from clicking "Launch" button.
-        </p>
-    `,
-  },
-  {
-    name: "Yo",
-    avatar: "yogi.jpg",
-    org: `
-      <span>
-        @Taskord
-      </span>
-    `,
-    role: "Creator",
-    text: `
-        <p>
-          Now contributing to @gitlab is a cakewalk with @gitpod 🎉!
-        </p>
-        <p>Already started my game! #100DaysOfCode</p>
-      `,
-  },
-  {
-    name: "Senior Enterprise Geek",
-    avatar: "k33g.jpg",
-    org: `
-      <span>
-        @GitLab
-      </span>
-    `,
-    role: "Senior Technical Account Manager",
-    text: `
-        <p>
-          Today is a great day, we added the @gitpod support to the @golo_lang repository. So now you can start hacking @golo_lang in almost only one click. Enjoy 🎉
-        </p>
-        <p>gitpod.io/#https://githu...</p>
-      `,
-  },
+	},
 ];
 
 export const ides: Ide[] = [
-  {
-    name: "vscode",
-    label: "Visual Studio Code",
-    screenshots: {
-      desktop: "vscode-desktop.png",
-      browser: "vscode-browser.png",
-    },
-    icon: "vscode.svg",
-  },
-  {
-    name: "goland",
-    availibility: "beta",
-    label: "Goland",
-    screenshots: {
-      desktop: "goland.png",
-    },
-    icon: "goland.svg",
-  },
-  {
-    name: "intellij",
-    availibility: "beta",
-    label: "IntelliJ IDEA",
-    screenshots: {
-      desktop: "Intellij.png",
-    },
-    icon: "intellij.svg",
-  },
-  {
-    name: "pycharm",
-    availibility: "beta",
-    label: "PyCharm",
-    screenshots: {
-      desktop: "pycharm.png",
-    },
-    icon: "pycharm.svg",
-  },
-  {
-    name: "phpstorm",
-    availibility: "beta",
-    label: "PhpStorm",
-    screenshots: {
-      desktop: "phpstorm.png",
-    },
-    icon: "phpstorm.svg",
-  },
-  {
-    name: "rubymine",
-    availibility: "beta",
-    label: "RubyMine",
-    screenshots: {
-      desktop: "rubymine.png",
-    },
-    icon: "rubymine.svg",
-  },
-  {
-    name: "webstorm",
-    availibility: "beta",
-    label: "WebStorm",
-    screenshots: {
-      desktop: "webstorm.png",
-    },
-    icon: "webstorm.svg",
-  },
-  {
-    name: "vim",
-    label: "Vim",
-    screenshots: {
-      desktop: "vim.png",
-    },
-    icon: "vim.svg",
-  },
+	{
+		name: 'vscode',
+		label: 'Visual Studio Code',
+		screenshots: {
+			desktop: 'vscode-desktop.webp',
+			browser: 'vscode-browser.webp',
+		},
+		icon: 'vscode.svg',
+	},
+	{
+		name: 'goland',
+		availibility: 'beta',
+		label: 'Goland',
+		screenshots: {
+			desktop: 'goland.webp',
+		},
+		icon: 'goland.svg',
+	},
+	{
+		name: 'intellij',
+		availibility: 'beta',
+		label: 'IntelliJ IDEA',
+		screenshots: {
+			desktop: 'Intellij.webp',
+		},
+		icon: 'intellij.svg',
+	},
+	{
+		name: 'pycharm',
+		availibility: 'beta',
+		label: 'PyCharm',
+		screenshots: {
+			desktop: 'pycharm.webp',
+		},
+		icon: 'pycharm.svg',
+	},
+	{
+		name: 'phpstorm',
+		availibility: 'beta',
+		label: 'PhpStorm',
+		screenshots: {
+			desktop: 'phpstorm.webp',
+		},
+		icon: 'phpstorm.svg',
+	},
+	{
+		name: 'rubymine',
+		availibility: 'beta',
+		label: 'RubyMine',
+		screenshots: {
+			desktop: 'rubymine.webp',
+		},
+		icon: 'rubymine.svg',
+	},
+	{
+		name: 'webstorm',
+		availibility: 'beta',
+		label: 'WebStorm',
+		screenshots: {
+			desktop: 'webstorm.webp',
+		},
+		icon: 'webstorm.svg',
+	},
+	{
+		name: 'clion',
+		availibility: 'beta',
+		label: 'CLion',
+		screenshots: {
+			desktop: 'clion.webp',
+		},
+		icon: 'clion.svg',
+	},
+	{
+		name: 'rider',
+		availibility: 'beta',
+		label: 'Rider',
+		screenshots: {
+			desktop: 'rider.webp',
+		},
+		icon: 'rider.svg',
+	},
+	{
+		name: 'vim',
+		label: 'Vim',
+		screenshots: {
+			desktop: 'vim.webp',
+		},
+		icon: 'vim.svg',
+	},
 ];
 
 export const featureTitles: FeatureTitle[] = [
-  {
-    main: "5h",
-    sub: "weekly productivity gain per engineer",
-  },
-  {
-    main: "4x",
-    sub: "faster time from zero to first PR",
-  },
-  {
-    main: "61%",
-    sub: "cost savings compared to a VDI solution",
-  },
-  {
-    main: "+500k",
-    sub: "developers are using Gitpod",
-  },
+	{
+		main: '<10 min',
+		sub: 'to onboard new developers',
+		href: '/customers/shares-io',
+	},
+	{
+		main: '40%',
+		sub: 'fewer bugs across development lifecycle',
+		href: '/customers/quizlet',
+	},
+	{
+		main: '5h',
+		sub: 'saved per developer per week',
+		href: '/customers/factorial',
+	},
+	{
+		main: '45%',
+		sub: 'increase in developer satisfaction (NPS)',
+		href: '/customers/quizlet',
+	},
 ];

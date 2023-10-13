@@ -1,11 +1,13 @@
 <script>
-  import NavItem from "./nav-item.svelte";
+	import NavItem from './nav-item.svelte';
 </script>
 
-<NavItem
-  navItem={{
-    href: "https://gitpod.io/login/",
-    label: "Login",
-    isExternal: true,
-  }}
-/>
+<ul>
+	<NavItem
+		navItem={{
+			href: 'https://gitpod.io/login/',
+			label: 'Login',
+			isExternal: true,
+		}}
+	/>
+</ul>

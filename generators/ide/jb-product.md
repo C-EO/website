@@ -8,10 +8,6 @@ title: __productTitle__
   Edit this file instead and run `yarn generate:jb`to apply.
 -->
 
-<script context="module">
-  export const prerender = true;
-</script>
-
 <!-- prettier-ignore -->
 # __productFullyQualifiedTitle__
 
@@ -76,9 +72,9 @@ Note: manually installed dependencies are only available in the current workspac
 
 Unlike with regular development, JetBrains [Remote development](https://www.jetbrains.com/help/__productDocCode__/remote-development-overview.html#defs) with {title} allows users to install plugins in different locations:
 
-- [**{title} backend plugins**](#install-on-title-backend) - The JetBrains {title} backend runs within the remote Gitpod workspace. Backend plugins contribute functionality for IDE experiences relating to the filesystem, tools or languages and frameworks. When installed, **a backend plugin only applies to the currently running Gitpod workspace** and is not associated with a user. However, a plugin can be [preconfigured for all users of a repository](#preconfigure-for-repository) so that the plugin is enabled with every workspace start. It is not currently possible to install a backend plugin that applies to all workspaces of a Gitpod user or team.
-- [**JetBrains Client plugins**](#install-on-jetbrains-client) - The JetBrains client runs on the users local machine and can be thought of as the user interface to the remote {title} backend. Client plugins are different to backend plugins as they contribute to the user interface aspect of the IDE experience (e.g. keyboard shortcuts and themes). Once installed, **a client plugin is enabled for all Gitpod workspaces the user opens** (if the workspace is running the exact same version of the {title} backend where the plugin was initially installed).
-- [**JetBrains Gateway plugins**](/docs/integrations/jetbrains-gateway#getting-started) - The JetBrains Gateway is an application downloaded onto a users local machine which allows users to start JetBrains Clients that are compatible with the {title} backend, running in a Gitpod workspace. JetBrains Gateway plugins are installed directly in JetBrains Gateway and contribute to remote development connection experiences (e.g. the [Gitpod JetBrains Gateway](https://plugins.jetbrains.com/plugin/18438-gitpod-gateway) plugin).
+-   [**{title} backend plugins**](#install-on-title-backend) - The JetBrains {title} backend runs within the remote Gitpod workspace. Backend plugins contribute functionality for IDE experiences relating to the filesystem, tools or languages and frameworks. When installed, **a backend plugin only applies to the currently running Gitpod workspace** and is not associated with a user. However, a plugin can be [preconfigured for all users of a repository](#preconfigure-for-repository) so that the plugin is enabled with every workspace start. It is not currently possible to install a backend plugin that applies to all workspaces of a Gitpod user or organization.
+-   [**JetBrains Client plugins**](#install-on-jetbrains-client) - The JetBrains client runs on the users local machine and can be thought of as the user interface to the remote {title} backend. Client plugins are different to backend plugins as they contribute to the user interface aspect of the IDE experience (e.g. keyboard shortcuts and themes). Once installed, **a client plugin is enabled for all Gitpod workspaces the user opens** (if the workspace is running the exact same version of the {title} backend where the plugin was initially installed).
+-   [**JetBrains Gateway plugins**](/docs/integrations/jetbrains-gateway#getting-started) - The JetBrains Gateway is an application downloaded onto a users local machine which allows users to start JetBrains Clients that are compatible with the {title} backend, running in a Gitpod workspace. JetBrains Gateway plugins are installed directly in JetBrains Gateway and contribute to remote development connection experiences (e.g. the [Gitpod JetBrains Gateway](https://plugins.jetbrains.com/plugin/18438-gitpod-gateway) plugin).
 
 ### Install on JetBrains Client
 
@@ -88,8 +84,8 @@ Once installed, **a client plugin is enabled for all Gitpod workspaces the user 
 
 To install a plugin on **JetBrains Client** follow these steps:
 
-- In **JetBrains Client** open the IDE settings and select **Plugins**.
-- Find the plugin in the **Marketplace** and click **Install**.
+-   In **JetBrains Client** open the IDE settings and select **Plugins**.
+-   Find the plugin in the **Marketplace** and click **Install**.
 
 <figure>
 <img class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Install a plugin on JetBrains Client" src="/images/editors/install-local-jb-plugin.png">
@@ -102,44 +98,67 @@ The JetBrains {title} backend runs within the remote Gitpod workspace. Backend p
 
 When installed, **a backend plugin only applies to the currently running Gitpod workspace** and is not associated with a user. However, a plugin can be [preconfigured for all users of a repository](#preconfigure-for-repository) so that the plugin is enabled with every workspace start.
 
-It is not currently possible to install a backend plugin that applies to all workspaces of a Gitpod user or team.
+It is not currently possible to install a backend plugin that applies to all workspaces of a Gitpod user or organization.
 
 #### Install for your current workspace
 
 You can install a plugin only for **your current workspace** following these steps:
 
-- In **JetBrains Client** open the IDE settings and select **Plugins On Host**.
-- Find the plugin in the **Marketplace** and click **Install**.
+-   In **JetBrains Client** open the IDE settings and select **Plugins On Host**.
+-   Find the plugin in the **Marketplace** and click **Install**.
 
 <figure>
 <img class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Install a plugin on {title} backend" src="/images/editors/install-remote-jb-plugin.png">
     <figcaption>Install a plugin on {title} backend</figcaption>
 </figure>
 
-#### Preconfigure for repository
+### Configure plugins for repository
 
 > JetBrains plugin support is currently in [Beta](/docs/help/public-roadmap/release-cycle) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
 
 You can share a plugin on **{title} backend** with everybody working on the repository by adding it to [.gitpod.yml](/docs/references/gitpod-yml) and pushing to your Git repository.
 Each workspace is preconfigured with plugins from the `gitpod.yml` configuration file. For example:
 
-```yaml
+```yml
 jetbrains:
-  __productId__:
-    plugins:
-      - zielu.gittoolbox
-      - izhangzhihao.rainbow.brackets
+    __productId__:
+        plugins:
+            - zielu.gittoolbox
+            - izhangzhihao.rainbow.brackets
 ```
 
 You can find the **pluginId** on the [JetBrains Marketplace](https://plugins.jetbrains.com) page:
 
-- Find a page of the required plugin.
-- Select the **Versions** tab.
-- Click any version to copy the **pluginId** (short name such as `org.rust.lang`) of the plugin you want to install.
+-   Find a page of the required plugin.
+-   Select the **Versions** tab.
+-   Click any version to copy the **pluginId** (short name such as `org.rust.lang`) of the plugin you want to install.
 
-#### Install for your user
+### Configure custom plugin repositories
 
-It is not yet possible to install plugins on **{title} backend** for your user to share across all your Gitpod workspaces.
+If you are using custom repositories, you can directly specify the URL of your custom repository or the identifier of your custom plugin. For example:
+
+```yml
+jetbrains:
+    __productId__:
+        plugins:
+            - http://my-custom-repository
+            - my-custom-plugin
+```
+
+For detailed guidelines on setting up and using custom plugin repositories, please refer to [JetBrains' documentation on custom plugin repositories](https://plugins.jetbrains.com/docs/intellij/custom-plugin-repository.html).
+
+### Install plugins from a workspace image
+
+Within your Dockerfile for the workspace image, copy the plugin archive (.zip file) to one of the following directories:
+
+-   `/home/gitpod/.gitpod/jetbrains/plugins` - This location installs plugins to all JetBrains products (IntelliJ IDEA, GoLang, etc).
+-   `/home/gitpod/.gitpod/jetbrains/__productId__/plugins` - This location will install plugins only to the given IDE, e.g. {title}.
+
+> **Note**: Before starting the {title} backend, Gitpod will read the locations specified above and install plugins.
+
+### Install plugins per a user
+
+To install plugins solely your user only profile, use the same approach as described in [install from a workspace image](#install-plugins-from-a-workspace-image). However, store your IDE Plugins in [.dotfiles](/docs/configure/user-settings/dotfiles#dotfiles) instead of the workspace image.
 
 ## Configure JVM options
 
@@ -147,10 +166,10 @@ It is not yet possible to install plugins on **{title} backend** for your user t
 
 You can adjust JVM options for {title} backend, especially if you want to increase the `-Xmx` memory size. For example:
 
-```yaml
+```yml
 jetbrains:
-  __productId__:
-    vmoptions: "-Xmx4g"
+    __productId__:
+        vmoptions: '-Xmx4g'
 ```
 
 For more detailed information on JVM options, refer to [Common JVM Options](https://www.jetbrains.com/help/__productDocCode__/tuning-the-ide.html#common-jvm-options) from JetBrains documentation.
@@ -191,13 +210,13 @@ Some IDE settings cannot be configured via [environment variables](/docs/configu
 
 **Include relevant IDE settings in your Workspace Image**
 
-- `/home/gitpod/.gitpod/jetbrains/options` - This location applies settings to all JetBrains products (IntelliJ IDEA, GoLang, etc).
-- `/home/gitpod/.gitpod/jetbrains/__productId__/options` - This location will apply settings only to the given IDE, e.g. {title}.
+-   `/home/gitpod/.gitpod/jetbrains/options` - This location applies settings to all JetBrains products (IntelliJ IDEA, GoLang, etc).
+-   `/home/gitpod/.gitpod/jetbrains/__productId__/options` - This location will apply settings only to the given IDE, e.g. {title}.
 
 **Commit relevant IDE settings to source control**
 
-- `/workspace/<your-project-name>/.gitpod/jetbrains/options` - This location applies settings to all JetBrains products (IntelliJ IDEA, GoLang, etc).
-- `/workspace/<your-project-name>/.gitpod/jetbrains/__productId__/options` - This location will apply settings only to the given IDE, e.g. {title}.
+-   `/workspace/<your-project-name>/.gitpod/jetbrains/options` - This location applies settings to all JetBrains products (IntelliJ IDEA, GoLang, etc).
+-   `/workspace/<your-project-name>/.gitpod/jetbrains/__productId__/options` - This location will apply settings only to the given IDE, e.g. {title}.
 
 For any further changes to your IDE settings, you will need to follow the above steps again.
 
@@ -228,17 +247,17 @@ Gitpod prebuilds allow you to improve it further by indexing before you start a 
 
 To leverage it:
 
-- configure prebuilds for your repository, refer to [Prebuilds](/docs/configure/projects/prebuilds);
-- enable indexing for {title} in prebuilds by editing [.gitpod.yml](/docs/references/gitpod-yml) in your repository:
+-   configure prebuilds for your repository, refer to [Prebuilds](/docs/configure/projects/prebuilds);
+-   enable indexing for {title} in prebuilds by editing [.gitpod.yml](/docs/references/gitpod-yml) in your repository:
 
-```yaml
+```yml
 jetbrains:
-  __productId__:
-    prebuilds:
-      version: stable
+    __productId__:
+        prebuilds:
+            version: stable
 ```
 
-- push changes to your Git repository to apply.
+-   push changes to your Git repository to apply.
 
 The `version` property allows you to control whether to index for `stable`, `latest`, or `both` versions of {title} compatible with Gitpod.
 Users can switch between `stable` and `latest` versions of {title} on the [user preferences](https://gitpod.io/preferences) page.
@@ -248,8 +267,8 @@ Users can switch between `stable` and `latest` versions of {title} on the [user 
 
 When using a Gitpod workspace you might experience performance issues caused by:
 
-- An application using more resources than expected
-- Resource consumption in adjacent containers running on the workspace node.
+-   An application using more resources than expected
+-   Resource consumption in adjacent containers running on the workspace node.
 
 In your JetBrains IDE within the JetBrains Gateway [Backend Control Center](https://www.jetbrains.com/help/idea/work-inside-remote-project.html#control_center) you can find two metrics relating to your running workspace: `Workspace CPU` and `Workspace Memory`.
 
@@ -261,9 +280,9 @@ The remaining metrics you can find in the Backend Control Center regarding the n
 
 ## FAQs
 
-- For the questions about supported IDEs and Editors in Gitpod, refer to [FAQs](/docs/references/ides-and-editors/faqs).
+-   For the questions about supported IDEs and Editors in Gitpod, refer to [FAQs](/docs/references/ides-and-editors/faqs).
 
-- For the general questions about JetBrains Remote Development, refer to refer to the general IDE <a href="https://www.jetbrains.com/help/__productDocCode__/faq-about-remote-development.html" target="_blank">{title} FAQ</a>.
+-   For the general questions about JetBrains Remote Development, refer to refer to the general IDE <a href="https://www.jetbrains.com/help/__productDocCode__/faq-about-remote-development.html" target="_blank">{title} FAQ</a>.
 
 ### Are there any JetBrains optimizations I can make if my workspace is slow?
 
@@ -276,6 +295,6 @@ Debugging performance can be challenging, as performance issues can depend on ma
 
 ## Troubleshooting
 
-- [What should I do if JetBrains Gateway and Gitpod aren’t working?](/docs/help/troubleshooting#what-should-i-do-if-jetbrains-gateway-and-gitpod-arent-working)
-- [Gitpod logs in JetBrains Client](/docs/help/troubleshooting#gitpod-logs-in-jetbrains-client)
-- [Gitpod logs in JetBrains Gateway](/docs/help/troubleshooting#gitpod-logs-in-jetbrains-gateway)
+-   [What should I do if JetBrains Gateway and Gitpod aren’t working?](/docs/help/troubleshooting#what-should-i-do-if-jetbrains-gateway-and-gitpod-arent-working)
+-   [Gitpod logs in JetBrains Client](/docs/help/troubleshooting#gitpod-logs-in-jetbrains-client)
+-   [Gitpod logs in JetBrains Gateway](/docs/help/troubleshooting#gitpod-logs-in-jetbrains-gateway)

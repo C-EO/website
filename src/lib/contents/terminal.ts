@@ -1,4 +1,4 @@
-export const terminalSource = `\u001b[33mGitpod\u001b[39m \u001b[34m/Workspace\u001b[39m $ cargo install --path . --features=stable
+export const terminalSource = `\u001b[33mgitpod\u001b[39m\u001b[34m/workspace\u001b[39m $ cargo install --path . --features=stable
   \u001b[33mBlocking\u001b[39m waiting for file lock on package cache
 \u001b[33mInstalling\u001b[39m nu v0.28.0 (/workspace/nushell)
   \u001b[33mBlocking\u001b[39m waiting for file lock on package cache
@@ -104,10 +104,10 @@ export const terminalSource = `\u001b[33mGitpod\u001b[39m \u001b[34m/Workspace\u
   \u001b[33mFinished\u001b[39m dev target(s) in 12m 30s
 
  exit
- 🤙 This task ran as a workspace prebuild
- 🎉 Well done on saving 12 minutes
+ 🍊 This task ran as a workspace prebuild
+ ⏱️ Well done on saving 𝟭𝟮 𝗺𝗶𝗻𝘂𝘁𝗲𝘀
 
-\u001b[33mGitpod\u001b[39m \u001b[34m/Workspace\u001b[39m $ `;
+\u001b[33mgitpod\u001b[39m\u001b[34m/workspace\u001b[39m $ `;
 
 export const linuxSource = `\u001b[33mGitpod\u001b[39m \u001b[34m/Workspace\u001b[39m $ sudo apt-get install mc
 \u001b[33mGitpod\u001b[39m \u001b[34m/Workspace\u001b[39m $ docker run -it alpine:latest

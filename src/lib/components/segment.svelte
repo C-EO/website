@@ -1,339 +1,311 @@
 <script lang="ts" context="module">
-  declare global {
-    interface Window {
-      analytics: any;
-      doNotTrack: any;
-      href?: string;
-      prevPages?: string[];
-      localStorage: any;
-    }
-  }
+	import { v4 } from 'uuid';
 
-  const allowsAnalytics = () => {
-    //isDoNotTrack is adopted from Segment snippet, see https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/quickstart/#step-2-add-the-segment-snippet
-    const isDoNotTrack = () =>
-      typeof navigator !== "undefined" &&
-      (parseInt(navigator.doNotTrack) === 1 ||
-        parseInt(window.doNotTrack) === 1 ||
-        // @ts-ignore
-        parseInt(navigator.msDoNotTrack) === 1 ||
-        navigator.doNotTrack === "yes");
+	declare global {
+		interface Window {
+			analytics: any;
+			doNotTrack: any;
+			href?: string;
+			prevPages?: string[];
+			localStorage: any;
+		}
+	}
 
-    return !!Cookies.get(cookies.ANALYTICAL) && !isDoNotTrack();
-  };
+	interface PageProps {
+		url: string;
+		path: string;
+		referrer?: string;
+		title?: string;
+		search?: string;
+	}
 
-  export const trackEvent = (
-    eventName: string,
-    props: any,
-    isStrictlyNecessary?: boolean
-  ) => {
-    if (!(allowsAnalytics() || isStrictlyNecessary)) {
-      return;
-    }
-    window.analytics?.track(
-      eventName,
-      {
-        ...props,
-        authenticated: !!Cookies.get("gitpod-user"),
-      },
-      {
-        context: {
-          ip: "0.0.0.0",
-          page: {
-            referrer: window.prevPages?.length == 2 ? window.prevPages[0] : "",
-            url: window.location.href,
-          },
-        },
-      }
-    );
-  };
+	const allowsAnalytics = () => {
+		return !!Cookies.get(cookies.ANALYTICAL);
+	};
 
-  export const trackPage = (props: any) => {
-    if (!allowsAnalytics()) {
-      return;
-    }
-    window.analytics?.page(
-      {
-        ...props,
-        authenticated: !!Cookies.get("gitpod-user"),
-      },
-      {
-        context: {
-          ip: "0.0.0.0",
-          page: props,
-        },
-      }
-    );
-  };
+	export const getOrSetCookieId = () => {
+		if (!allowsAnalytics()) {
+			return;
+		}
 
-  export const trackIdentity = (traits: any, isStrictlyNecessary?: boolean) => {
-    if (!(allowsAnalytics() || isStrictlyNecessary)) {
-      return;
-    }
-    window.analytics?.identify(traits, {
-      context: {
-        ip: "0.0.0.0",
-        page: {
-          referrer: window.prevPages?.length == 2 ? window.prevPages[0] : "",
-          url: window.location.href,
-        },
-      },
-    });
-  };
+		var cookieId = Cookies.get('ajs_anonymous_id');
+		if (!cookieId) {
+			cookieId = v4();
+			Cookies.set('ajs_anonymous_id', cookieId, {
+				domain: '.gitpod.io',
+				expires: 365,
+			});
+		}
+		return cookieId;
+	};
+
+	// This function checks if the user has opted in to analytics before
+	// fetching or setting the cookie ID.
+
+	export const getVisitorId = async () => {
+		try {
+			if (allowsAnalytics()) {
+				return getOrSetCookieId();
+			}
+
+			// This function calls the API to get the cookieless ID, and returns it as a JSON string.
+			// It is used in the calendly url page to get the cookieless ID of the user.
+
+			const response = await fetch('/api/get-cookieless-id', {
+				method: 'GET',
+			});
+			const data = await response.json();
+			return (await data.cookielessId) as string;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const getPageProps = (): PageProps => {
+		return {
+			path: window.location.pathname,
+			url: window.location.href,
+			search: window.location.search,
+			title: document.title,
+			referrer: window.prevPages
+				? window.prevPages[window.prevPages.length - 1]
+				: undefined,
+		};
+	};
+
+	const getEventContext = () => {
+		return {
+			page: getPageProps(),
+			allowsAnalytics: allowsAnalytics(),
+			authenticated: allowsAnalytics()
+				? !!Cookies.get('gitpod-user')
+				: undefined,
+			theme_preference: window.matchMedia('(prefers-color-scheme: dark)')
+				.matches
+				? 'dark'
+				: 'light',
+			theme: localStorage.getItem('theme'),
+			viewport: {
+				height: window.innerHeight,
+				width: window.innerWidth,
+			},
+			timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+		};
+	};
+
+	export const trackEvent = async (eventName: string, props: any) => {
+		const body: AnalyticsPayload = {
+			cookieId: getOrSetCookieId(),
+			type: 'event',
+			eventName,
+			props: props,
+			context: getEventContext(),
+		};
+
+		await fetch('/api/collect-data', {
+			method: 'POST',
+			body: JSON.stringify(body),
+		});
+	};
+
+	export const trackPage = async () => {
+		const pageProps = getPageProps();
+		const body: AnalyticsPayload = {
+			cookieId: getOrSetCookieId(),
+			type: 'page',
+			props: pageProps,
+			context: getEventContext(),
+		};
+
+		await fetch('/api/collect-data', {
+			method: 'POST',
+			body: JSON.stringify(body),
+		});
+	};
+
+	export const trackIdentity = async (traits: any) => {
+		const body: AnalyticsPayload = {
+			cookieId: getOrSetCookieId(),
+			type: 'identity',
+			traits: traits,
+			context: getEventContext(),
+		};
+
+		await fetch('/api/collect-data', {
+			method: 'POST',
+			body: JSON.stringify(body),
+		});
+	};
 </script>
 
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { page } from "$app/stores";
-  import Cookies from "js-cookie";
-  import { cookies } from "$lib/constants";
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+	import Cookies from 'js-cookie';
+	import { cookies } from '$lib/constants';
+	import type { AnalyticsPayload } from '../types/analytics';
 
-  interface TrackWebsiteClick {
-    path: string;
-    url: string;
-    context?: string;
-    position?: string;
-    variant?: string;
-    label?: string;
-    destination?: string;
-    dnt?: boolean;
-  }
+	interface TrackWebsiteClick {
+		path: string;
+		url: string;
+		context?: string;
+		position?: string;
+		variant?: string;
+		label?: string;
+		destination?: string;
+		dnt?: boolean;
+	}
 
-  const implicitPositions = ["nav", "footer", "main"];
+	const implicitPositions = ['nav', 'footer', 'main'];
 
-  const handleButtonOrAnchorTracking = (props: MouseEvent) => {
-    var curr = props.target as HTMLElement;
-    //check if current target or any ancestor up to document is button or anchor
-    while (
-      curr.parentNode != undefined &&
-      !(curr.parentNode instanceof Document)
-    ) {
-      if (
-        curr instanceof HTMLButtonElement ||
-        curr instanceof HTMLAnchorElement ||
-        (curr instanceof HTMLDivElement && curr.onclick) ||
-        (curr instanceof HTMLInputElement &&
-          curr.classList.contains("toggle")) ||
-        (curr instanceof HTMLDetailsElement && !curr.open)
-      ) {
-        trackButtonOrAnchor(curr);
-        break; //finding first ancestor is sufficient
-      }
-      curr = curr.parentNode as HTMLElement;
-    }
-  };
+	const handleButtonOrAnchorTracking = (props: MouseEvent) => {
+		var curr = props.target as HTMLElement;
+		//check if current target or any ancestor up to document is button or anchor
+		while (
+			curr.parentNode != undefined &&
+			!(curr.parentNode instanceof Document)
+		) {
+			if (
+				curr instanceof HTMLButtonElement ||
+				curr instanceof HTMLAnchorElement ||
+				(curr instanceof HTMLDivElement && curr.onclick) ||
+				(curr instanceof HTMLInputElement &&
+					curr.classList.contains('toggle')) ||
+				(curr instanceof HTMLDetailsElement && !curr.open)
+			) {
+				trackButtonOrAnchor(curr);
+				break; //finding first ancestor is sufficient
+			}
+			curr = curr.parentNode as HTMLElement;
+		}
+	};
 
-  const trackButtonOrAnchor = (
-    target:
-      | HTMLAnchorElement
-      | HTMLButtonElement
-      | HTMLDivElement
-      | HTMLDetailsElement
-  ) => {
-    //read manually passed analytics props from 'data-analytics' attribute of event target
-    let passedProps: TrackWebsiteClick | undefined;
-    if (target.dataset.analytics) {
-      try {
-        passedProps = JSON.parse(target.dataset.analytics) as TrackWebsiteClick;
-      } catch (error) {
-        console.error(error);
-      }
-    }
+	const trackButtonOrAnchor = async (
+		target:
+			| HTMLAnchorElement
+			| HTMLButtonElement
+			| HTMLDivElement
+			| HTMLDetailsElement,
+	) => {
+		//read manually passed analytics props from 'data-analytics' attribute of event target
+		let passedProps: TrackWebsiteClick | undefined;
+		if (target.dataset.analytics) {
+			try {
+				passedProps = JSON.parse(
+					target.dataset.analytics,
+				) as TrackWebsiteClick;
+			} catch (error) {
+				console.error(error);
+			}
+		}
 
-    let trackingMsg: TrackWebsiteClick = {
-      path: window.location.pathname,
-      url: window.location.href,
-      label: target.innerText || target.ariaLabel,
-    };
+		let trackingMsg: TrackWebsiteClick = {
+			path: window.location.pathname,
+			url: window.location.href,
+			label: target.innerText || target.ariaLabel,
+		};
 
-    //assign style of button to variant (e.g. if class contains "btn-primary", "btn-primary" will be passed)
-    for (var i = 0; i < target.classList.length; i++) {
-      const item = target.classList[i];
-      if (/btn-.*/.test(item)) {
-        trackingMsg.variant = item;
-        break;
-      }
-    }
+		//assign style of button to variant (e.g. if class contains "btn-primary", "btn-primary" will be passed)
+		for (var i = 0; i < target.classList.length; i++) {
+			const item = target.classList[i];
+			if (/btn-.*/.test(item)) {
+				trackingMsg.variant = item;
+				break;
+			}
+		}
 
-    if (target instanceof HTMLDetailsElement) {
-      trackingMsg.variant = "open_details";
-    }
+		if (target instanceof HTMLDetailsElement) {
+			trackingMsg.variant = 'open_details';
+		}
 
-    if (target instanceof HTMLAnchorElement) {
-      const anchor = target as HTMLAnchorElement;
-      trackingMsg.destination = anchor.href;
-      //an anchor tag that is not styled as button will be classified as "link" variant
-      trackingMsg.variant = trackingMsg.variant || "link";
-    }
+		if (target instanceof HTMLAnchorElement) {
+			const anchor = target as HTMLAnchorElement;
+			trackingMsg.destination = anchor.href;
+			//an anchor tag that is not styled as button will be classified as "link" variant
+			trackingMsg.variant = trackingMsg.variant || 'link';
+		}
 
-    const getAncestorProps = (
-      curr: HTMLElement | null
-    ): TrackWebsiteClick | undefined => {
-      const curr_tag = curr.tagName?.toLowerCase();
-      if (!curr || curr_tag == "body") {
-        return;
-      }
-      const ancestorProps: TrackWebsiteClick | undefined = getAncestorProps(
-        curr.parentElement
-      );
-      const currProps = JSON.parse(
-        curr.dataset.analytics || "{}"
-      ) as TrackWebsiteClick;
-      //set position in trackingMsg if it can be read from ancestor prop
-      if (implicitPositions.includes(curr_tag)) {
-        trackingMsg.position = curr_tag;
-      }
-      return { ...ancestorProps, ...currProps };
-    };
+		const getAncestorProps = (
+			curr: HTMLElement | null,
+		): TrackWebsiteClick | undefined => {
+			const curr_tag = curr.tagName?.toLowerCase();
+			if (!curr || curr_tag == 'body') {
+				return;
+			}
+			const ancestorProps: TrackWebsiteClick | undefined =
+				getAncestorProps(curr.parentElement);
+			const currProps = JSON.parse(
+				curr.dataset.analytics || '{}',
+			) as TrackWebsiteClick;
+			//set position in trackingMsg if it can be read from ancestor prop
+			if (implicitPositions.includes(curr_tag)) {
+				trackingMsg.position = curr_tag;
+			}
+			return { ...ancestorProps, ...currProps };
+		};
 
-    const ancestorProps = getAncestorProps(target);
+		const ancestorProps = getAncestorProps(target);
 
-    //props that were passed directly to the event target take precedence over those passed to ancestor elements, which take precedence over those implicitly determined.
-    trackingMsg = { ...trackingMsg, ...ancestorProps, ...passedProps };
+		//props that were passed directly to the event target take precedence over those passed to ancestor elements, which take precedence over those implicitly determined.
+		trackingMsg = { ...trackingMsg, ...ancestorProps, ...passedProps };
 
-    //"signup" context always takes preferences over others (relevant for marketing attribution)
-    if (
-      !Cookies.get("gitpod-user") &&
-      target instanceof HTMLAnchorElement &&
-      (target as HTMLAnchorElement).href.startsWith("https://gitpod.io/")
-    ) {
-      trackingMsg.context = "signup";
-    }
+		//"signup" context always takes preferences over others (relevant for marketing attribution)
+		if (
+			!Cookies.get('gitpod-user') &&
+			target instanceof HTMLAnchorElement &&
+			(target as HTMLAnchorElement).href.startsWith('https://gitpod.io/')
+		) {
+			trackingMsg.context = 'signup';
+		}
 
-    //if dnt was passed to event target or any ancestor, no track call is done
-    if (trackingMsg.dnt) {
-      return;
-    }
-    trackEvent("website_clicked", trackingMsg);
-  };
+		//if dnt was passed to event target or any ancestor, no track call is done
+		if (trackingMsg.dnt) {
+			return;
+		}
+		await trackEvent('website_clicked', trackingMsg);
+	};
 
-  const writeKey =
-    typeof window !== "undefined" &&
-    window.location.hostname === "www.gitpod.io"
-      ? "5aJzy2ASNbqx8I0kwppRflDZpL7pS1GO" // Website Production
-      : "Xe5zR3MbnyxHsveZr4HvrY35PL9iT0EH"; // Website Staging
+	const updatePrevPages = () => {
+		window.prevPages.push(window.location.href);
+		if (window.prevPages.length > 2) {
+			window.prevPages.shift();
+		}
+	};
 
-  onMount(async () => {
-    // Override anonymous ID in local storage if it exists in Cookie
-    // This is done in order to guarantee the same anonymous_id is used by dashboard and website
-    const current_id = Cookies.get("ajs_anonymous_id");
-    if (current_id) {
-      window.localStorage.setItem("ajs_anonymous_id", current_id);
-    }
-    // Create a queue, but don't obliterate an existing one!
-    var analytics = (window.analytics = window.analytics || []);
-    // If the real analytics.js is already on the page return.
-    if (analytics.initialize) return;
-    // If the snippet was invoked already show an error.
-    if (analytics.invoked) {
-      if (window.console && console.error) {
-        console.error("Segment snippet included twice.");
-      }
-      return;
-    }
-    // Invoked flag, to make sure the snippet
-    // is never invoked twice.
-    analytics.invoked = true;
-    // A list of the methods in Analytics.js to stub.
-    analytics.methods = [
-      "trackSubmit",
-      "trackClick",
-      "trackLink",
-      "trackForm",
-      "pageview",
-      "identify",
-      "reset",
-      "group",
-      "track",
-      "ready",
-      "alias",
-      "debug",
-      "page",
-      "once",
-      "off",
-      "on",
-      "addSourceMiddleware",
-      "addIntegrationMiddleware",
-      "setAnonymousId",
-      "addDestinationMiddleware",
-    ];
-    // Define a factory to create stubs. These are placeholders
-    // for methods in Analytics.js so that you never have to wait
-    // for it to load to actually record data. The `method` is
-    // stored as the first argument, so we can replay the data.
-    analytics.factory = function (method: any) {
-      return function () {
-        var args = Array.prototype.slice.call(arguments);
-        args.unshift(method);
-        analytics.push(args);
-        return analytics;
-      };
-    };
-    // For each of our methods, generate a queueing stub.
-    for (var i = 0; i < analytics.methods.length; i++) {
-      var key = analytics.methods[i];
-      analytics[key] = analytics.factory(key);
-    }
-    // Define a method to load Analytics.js from our CDN,
-    // and that will be sure to only ever load it once.
-    analytics.load = function (key: string, options: any) {
-      // Create an async script element based on your key.
-      var script = document.createElement("script");
-      script.type = "text/javascript";
-      script.async = true;
-      script.src =
-        "https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";
-      // Insert our script next to the first script element.
-      var first = document.getElementsByTagName("script")[0];
-      first.parentNode.insertBefore(script, first);
-      analytics._loadOptions = options;
-    };
-    analytics._writeKey = writeKey;
-    // Add a version to keep track of what's in the wild.
-    analytics.SNIPPET_VERSION = "4.13.2";
+	onMount(async () => {
+		// Track first page
+		window.prevPages = [document.referrer];
+		await trackPage().then(updatePrevPages);
+		window.addEventListener('click', handleButtonOrAnchorTracking, true);
 
-    analytics.load(writeKey);
+		// Track Extension install or uninstall if necessary
+		if (
+			['/extension-activation', '/extension-uninstall'].indexOf(
+				window.location.pathname,
+			) > -1
+		) {
+			const doTrack = JSON.parse(
+				new URLSearchParams(window.location.search).get('track'),
+			);
+			if (doTrack) {
+				await trackEvent(
+					window.location.pathname == '/extension-activation'
+						? 'extension_installed'
+						: 'extension_uninstalled',
+					{},
+				);
+				window.location.href =
+					window.location.origin + window.location.pathname;
+			}
+		}
+	});
 
-    // Track first page
-    trackPage({});
-    window.prevPages = [window.location.href];
-    window.addEventListener("click", handleButtonOrAnchorTracking, true);
-
-    // Track Extension install or uninstall if necessary
-    if (
-      ["/extension-activation", "/extension-uninstall"].indexOf(
-        window.location.pathname
-      ) > -1
-    ) {
-      const doTrack = JSON.parse(
-        new URLSearchParams(window.location.search).get("track")
-      );
-      if (doTrack) {
-        trackEvent(
-          window.location.pathname == "/extension-activation"
-            ? "extension_installed"
-            : "extension_uninstalled",
-          {}
-        );
-        window.location.href =
-          window.location.origin + window.location.pathname;
-      }
-    }
-  });
-
-  $: if ($page.url.pathname) {
-    // We need to depend on $page.url.pathname to trigger
-    // a recompute on each new page.
-    if (typeof window !== "undefined" && window.prevPages) {
-      // Track subsequent pages
-      trackPage({
-        referrer: window.prevPages[window.prevPages.length - 1],
-        url: window.location.href,
-      });
-      window.prevPages.push(window.location.href);
-      if (window.prevPages.length > 2) {
-        window.prevPages.shift();
-      }
-    }
-  }
+	$: if ($page.url.pathname) {
+		// We need to depend on $page.url.pathname to trigger
+		// a recompute on each new page.
+		if (typeof window !== 'undefined' && window.prevPages) {
+			// Track subsequent pages
+			trackPage().then(updatePrevPages);
+		}
+	}
 </script>
